@@ -1,0 +1,125 @@
+<%- include('../partials/header'); %>
+
+<div class="container">
+  <div class="row"></div>
+  <h1 style="text-align:center"> Edit “<%=post.name%>”</h1>
+  <div style="width: 50%; margin:25px auto;">
+    <form action="/posts/<%=post._id%>?_method=PUT" method="POST">
+      <div class="form-group">
+        <label for="editName">Name</label>
+        <input class="form-control" id="editName" type="text" value="<%=post.name%>" name="post[name]">
+      </div>
+      <div class="form-group">
+        <label for="editImage">Image Url</label>
+        <input class="form-control" id="editImage" type="text" value="<%=post.image%>" name="post[image]">
+      </div>
+      <div class="form-group">
+        <label for="editDesc">Description</label>
+
+        <textarea class="form-control" placeholder="description - this short text will go to first part"
+          name="post[description]" id="editDesc" rows="6"> <%= post.description %> </textarea>
+      </div>
+      <!-- Ingredients -->
+      <p style="text-align: center;">Add ingredients</p>
+      <div class="form-group">
+        <p class="btn btn-sm btn-danger btn-block" id="plusIngredient">
+          <i class="fa fa-plus"></i>
+        </p>
+      </div>
+      <ul id="ingredientsUl">
+        <%post.ingredients.forEach(function(ingredient){%>
+        <div class="row"><span class="col-sm-1"><i class="fa fa-trash"></i></span>
+          <div class="form-group col-sm-10"><input class="form-control" type="text" value="<%=ingredient%>"
+              name="post[ingredients]"></div>
+        </div>
+        <%});%>
+
+      </ul>
+      <!-- Steps -->
+      <p style="text-align: center;">Add steps</p>
+      <div class="form-group">
+        <p class="btn btn-sm btn-danger btn-block" id="plusStep">
+          <i class="fa fa-plus"></i>
+        </p>
+      </div>
+      <ul id="stepUl">
+        <%post.steps.forEach(function(step){%>
+        <div class="row"><span class="col-sm-1"><i class="fa fa-trash"></i></span>
+          <div class="form-group col-sm-10"><input class="form-control" type="text" value="<%=step%>"
+              name="post[steps]"></div>
+        </div>
+        <%});%>
+
+      </ul>
+
+      <!-- Edit Servings, Prep Time, Calories -->
+      <div class="form-group">
+        <label for="editServing">Servings</label>
+        <input class="form-control" id="editServing" type="text" value="<%=post.serving%>" name="post[serving]">
+      </div>
+      <div class="form-group">
+        <label for="editPrepTime">Prep Time</label>
+        <input class="form-control" id="editPrepTime" type="text" value="<%=post.prepTime%>" name="post[prepTime]">
+      </div>
+      <div class="form-group">
+        <label for="editCalories">Calories</label>
+        <input class="form-control" id="editCalories" type="text" value="<%=post.calories%>" name="post[calories]">
+      </div>
+
+      <!-- Edit Text -->
+      <div class="form-group">
+        <label for="editText">Text</label>
+        <textarea class="form-control" placeholder="description - this short text will go to first part"
+          name="post[text]" id="editText" rows="6"> <%= post.text %> </textarea>
+      </div>
+
+
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button class="btn btn-lg btn-danger btn-block">Submit!</button>
+      </div>
+    </form>
+    <a href="/posts"> Go Back </a>
+  </div>
+</div>
+</div>
+
+<%- include('../partials/footer')%>
+
+<script>
+  // steps script
+
+  $('#stepUl').on('click', 'span', function (event) {
+    $(this)
+      .parent()
+      .fadeOut(500, function () {
+        $(this).remove();
+      });
+    event.stopPropagation();
+  });
+
+  function newStep() {
+    $('#stepUl').append(
+      '<div class="row"><span class="col-sm-1"><i class="fa fa-trash"></i></span><div class="form-group col-sm-10"><input class="form-control" type="text" placeholder="add step" name="post[steps]"></div></div>'
+    );
+  }
+  $('#plusStep').on('click', newStep);
+
+  //  ingredient scripts
+
+  $('#ingredientsUl').on('click', 'span', function (event) {
+    $(this)
+      .parent()
+      .fadeOut(500, function () {
+        $(this).remove();
+      });
+    event.stopPropagation();
+  });
+
+  function newIngredient() {
+    $('#ingredientsUl').append(
+      '<div class="row"><span class="col-sm-1"><i class="fa fa-trash"></i></span><div class="form-group col-sm-10"><input class="form-control" type="text" placeholder="add ingredient" name="post[ingredients]"></div></div>'
+    );
+  }
+  $('#plusIngredient').on('click', newIngredient);
+</script>

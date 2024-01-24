@@ -1,0 +1,137 @@
+<%- include('../partials/header'); %>
+
+<div class="container">
+  <div class="row"></div>
+  <h1 style="text-align: center">Create a New Post</h1>
+  <div style="width: 50%; margin: 25px auto">
+    <form
+      action="/posts"
+      method="POST"
+      onkeydown="return event.key != 'Enter';"
+    >
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="image url"
+          name="image"
+        />
+      </div>
+      <textarea
+        class="form-control"
+        placeholder="description - this short text will go to first part"
+        name="description"
+        id="text"
+        rows="4"
+      ></textarea>
+
+      <!-- Ingredients -->
+      <p style="text-align: center">Add ingredients</p>
+      <div class="form-group">
+        <p class="btn btn-sm btn-danger btn-block" id="plusIngredient">
+          <i class="fa fa-plus"></i>
+        </p>
+      </div>
+      <ul id="ingredientsUl"></ul>
+      <!-- Steps -->
+      <p style="text-align: center">Add steps</p>
+      <div class="form-group">
+        <p class="btn btn-sm btn-danger btn-block" id="plusStep">
+          <i class="fa fa-plus"></i>
+        </p>
+      </div>
+      <ul id="stepUl"></ul>
+      <!------------------- serving / prep time / calories   ------------------->
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="serving"
+          name="serving"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="prep time"
+          name="prepTime"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="calories"
+          name="calories"
+        />
+      </div>
+      <textarea
+        class="form-control"
+        placeholder="this - text will go to last part"
+        name="text"
+        id="text"
+        cols="50"
+        rows="4"
+      ></textarea>
+      <br />
+      <div class="form-group">
+        <button class="btn btn-lg btn-danger btn-block" id="submitBtn">
+          Submit!
+        </button>
+      </div>
+    </form>
+    <a href="/posts" style="color: #c01f54"> Go Back </a>
+  </div>
+</div>
+
+<%- include('../partials/footer')%>
+<style></style>
+
+<script>
+  // steps script
+
+  $("#stepUl").on("click", "span", function (event) {
+    $(this)
+      .parent()
+      .fadeOut(500, function () {
+        $(this).remove();
+      });
+    event.stopPropagation();
+  });
+
+  function newStep() {
+    $("#stepUl").append(
+      '<div class="row"><span class="col-sm-1"><i class="fa-solid fa-trash"></i></span><div class="form-group col-sm-10"><input class="form-control" type="text" placeholder="add step" name="steps"></div></div>'
+    );
+  }
+  $("#plusStep").on("click", newStep);
+
+  //  ingredient scripts
+
+  $("#ingredientsUl").on("click", "span", function (event) {
+    $(this)
+      .parent()
+      .fadeOut(500, function () {
+        $(this).remove();
+      });
+    event.stopPropagation();
+  });
+
+  function newIngredient() {
+    $("#ingredientsUl").append(
+      '<div class="row"><span class="col-sm-1"><i class="fa-solid fa-trash"></i></span><div class="form-group col-sm-10"><input class="form-control" type="text" placeholder="add ingredient" name="ingredients"></div></div>'
+    );
+  }
+  $("#plusIngredient").on("click", newIngredient);
+</script>

@@ -1,0 +1,51 @@
+<%- include('../partials/header'); %>
+
+<div class="container">
+  <header
+    class="jumbotron myJumbo"
+    style="
+      background-image: url('https://images.unsplash.com/photo-1486427944299-d1955d23e34d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-repeat: no-repeat;
+      color: aliceblue;
+    "
+  >
+    <h1>GREAT BAKERY</h1>
+    <p>Hope You Enjoy Our Recipes</p>
+    <%if(currentUser && currentUser.isAdmin){%>
+    <p>
+      <a class="btn btn-danger btn-sm" href="/posts/new"> Add New Post </a>
+    </p>
+    <%}%>
+  </header>
+  <!-- old card system? kinda card, but there is no card xD p.s it works -->
+  <div class="row text-center" style="display: flex; flex-wrap: wrap">
+    <%posts.reverse().forEach(function(post){%>
+    <div class="col-md-3 col-sm-6">
+      <div class="thumbnail">
+        <img
+          src=" <%=post.image%>"
+          class="img-fluid img-thumbnail rounded mx-auto d-block h200"
+        />
+      </div>
+
+      <div class="caption">
+        <h4>
+          <a href="/posts/<%=post._id%>" style="color: #751b39">
+            <%=post.name.toUpperCase()%></a
+          >
+        </h4>
+      </div>
+
+      <div class="description">
+        <p>
+          <a href="/posts/<%=post._id%>" class="btn btn-danger btn-block">
+            Read More
+          </a>
+        </p>
+      </div>
+    </div>
+    <%})%>
+  </div>
+</div>
+
+<%- include('../partials/footer')%>

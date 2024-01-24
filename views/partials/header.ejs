@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>BakeBake</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <script
+      src="https://kit.fontawesome.com/152b3d02b1.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="https://kit.fontawesome.com/b673d3e79b.js"></script> -->
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Grand Bakery</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <%if(!currentUser){%>
+          <li><a class="btn my-2 my-sm-0" href="/login">Login</a></li>
+          <li><a class="btn my-2 my-sm-0" href="/register">Sign Up</a></li>
+          <%}else{%>
+          <li>
+            <a class="btn my-2 my-sm-0" href="/login"
+              >Signed In As <%=currentUser.username%></a
+            >
+          </li>
+          <li><a class="btn my-2 my-sm-0" href="/logout">Logout</a></li>
+          <%}%>
+        </ul>
+      </div>
+    </nav>
+    <br />
+
+    <!--  ERROR MESSAGES -->
+    <div class="container">
+      <% if(error && error.length > 0){ %>
+      <div id="flash" class="alert alert-danger" role="alert"><%= error %></div>
+      <% } %> <% if(success && success.length > 0){ %>
+      <div id="flash" class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>
